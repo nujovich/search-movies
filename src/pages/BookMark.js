@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import {Title} from '../components/Title'
+import { MoviesBookmarked } from '../components/MoviesBookmarked'
 
 export class BookMark extends Component {
+    state = { movieId: ''}
+
     static propTypes = {
         match : PropTypes.shape({
             params : PropTypes.object,
@@ -14,12 +16,12 @@ export class BookMark extends Component {
 
     componentDidMount() {
         const {movieId} = this.props.match.params
-        console.log(movieId)
+        this.setState({movieId})
     }
     render() {
         return(
             <div>
-                <Title>Bookmark movie</Title>
+                <MoviesBookmarked movieId={this.state.movieId}/> 
             </div>
         )
     }

@@ -14,7 +14,7 @@ export const BreadCrumb = () => (
         </Link>
     </li>
     <li>
-        <Link to='/bookmarked'>
+        <Link to='/bookmarks'>
             <FontAwesomeIcon icon={faBookmark}/>
             <span>View bookmarked movies</span>
         </Link>

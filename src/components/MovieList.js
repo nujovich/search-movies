@@ -9,13 +9,13 @@ export class MovieList extends Component {
 
     render() {
         const {movies} =this.props
-
         return (
             <div className="moviesList">
             {
                 movies.map (movie => {
                     return (
                         <div key={movie.imdbID} className='movieItem'>
+                        {console.log(movie.imdbID)}
                             <Movie  id = {movie.imdbID}
                                     title ={movie.Title}
                                     year = {movie.Year}

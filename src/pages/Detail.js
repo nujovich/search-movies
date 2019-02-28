@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import { BreadCrumb } from '../components/BreadCrumb';
+import {Link} from 'react-router-dom'
 
 const API_KEY='bc2cf202'
 
@@ -34,7 +35,7 @@ export class Detail extends Component {
     }
 
     render() {
-        const {Title, Poster, Actors, Metascore, Plot} = this.state.movie
+        const {imdbID, Title, Poster, Actors, Metascore, Plot} = this.state.movie
         return(
             <div>
                 <BreadCrumb/>
@@ -52,6 +53,7 @@ export class Detail extends Component {
                             Sinopsis: {Plot}
                         </span>
                     </div>
+                    <Link to={`/bookmark/${imdbID}`} className="button is-info">Bookmark this movie</Link>
                 </div>
             </div>
         )
