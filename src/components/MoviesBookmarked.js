@@ -14,33 +14,52 @@ export class MoviesBookmarked extends Component {
 
 
     componentWillReceiveProps(nextProps) {
-        fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&i=${nextProps.movieId}`)
-        .then(res => res.json())
-        .then(movie => {
-            this.setState({ 
-                bookmarks: [...this.state.bookmarks, movie]
+        if(nextProps.movieId !== '') {
+            fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&i=${nextProps.movieId}`)
+            .then(res => res.json())
+            .then(movie => {
+                this.setState({ 
+                    bookmarks: [...this.state.bookmarks, movie]
+                })
             })
-        })
+        } 
     }
-    /* componentWillUnmount() {
-        localStorage.setItem('bookmarks', JSON.stringify(this.state.movies))
+    componentWillUnmount() {
+        localStorage.setItem('bookmarks', JSON.stringify(this.state.bookmarks))
     }
-      
-    componentWillMount() {
-        var movies = JSON.parse(localStorage.getItem('bookmarks'))
-        this.setState({movies})
-    } */
 
+    //ComponenDidMount hace que si tiene que renderizar otra vez guarda la ultima peli adherida
+    //al bookmark, componentWillMount no lo hacía
+    componentDidMount() {
+        var movies = JSON.parse(localStorage.getItem('bookmarks'))
+        if(movies !== null) {
+            this.setState({ 
+                bookmarks: [...this.state.bookmarks, ...movies]
+            })
+        } else {
+            this.setState({ 
+                bookmarks: [...this.state.bookmarks, []]
+            })
+        }
+    } 
+
+    _handleCleaning = () => {
+        this.setState({bookmarks : []})
+    }
 
     render() {
         const {bookmarks} = this.state
-        console.log({bookmarks})
         return (
             <div>
                 <BreadCrumb />
                 <Title>Bookmarks for you</Title>
-                <MovieList movies={bookmarks} />
+                {bookmarks.length !== 0 ? <MovieList movies={bookmarks} /> 
+                : <p style={{color: 'red', fontSize: 50}}>You don't have any bookmarks</p>}
             </div>
         )
     }
+}
+
+MoviesBookmarked.defaultProps = {
+    movieId : ''
 }

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import { BreadCrumb } from '../components/BreadCrumb';
-import {Link} from 'react-router-dom'
+import { DisableBookmark } from '../components/DisableBookmark';
 
 const API_KEY='bc2cf202'
 
@@ -53,7 +53,7 @@ export class Detail extends Component {
                             Sinopsis: {Plot}
                         </span>
                     </div>
-                    <Link to={`/bookmark/${imdbID}`} className="button is-info">Bookmark this movie</Link>
+                    <DisableBookmark imdbID={imdbID} />
                 </div>
             </div>
         )

@@ -15,7 +15,6 @@ export class MovieList extends Component {
                 movies.map (movie => {
                     return (
                         <div key={movie.imdbID} className='movieItem'>
-                        {console.log(movie.imdbID)}
                             <Movie  id = {movie.imdbID}
                                     title ={movie.Title}
                                     year = {movie.Year}
