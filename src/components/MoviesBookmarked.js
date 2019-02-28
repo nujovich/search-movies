@@ -28,8 +28,8 @@ export class MoviesBookmarked extends Component {
         localStorage.setItem('bookmarks', JSON.stringify(this.state.bookmarks))
     }
 
-    //ComponenDidMount hace que si tiene que renderizar otra vez guarda la ultima peli adherida
-    //al bookmark, componentWillMount no lo hacía
+    //ComponenDidMount hace que si tiene que renderizar desde el breadcrumb 
+    //otra vez guarda la ultima peli adherida al bookmark, componentWillMount no lo hacía
     componentDidMount() {
         var movies = JSON.parse(localStorage.getItem('bookmarks'))
         if(movies !== null) {
