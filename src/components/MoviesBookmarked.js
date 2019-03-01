@@ -10,7 +10,7 @@ export class MoviesBookmarked extends Component {
         movieId : PropTypes.string,
     }
 
-    state = {bookmarks: []}
+    state = {bookmarks: [], cleaned: false}
 
 
     componentWillReceiveProps(nextProps) {
@@ -44,15 +44,18 @@ export class MoviesBookmarked extends Component {
     } 
 
     _handleCleaning = () => {
-        this.setState({bookmarks : []})
+        this.setState({bookmarks : [], cleaned: true})
     }
 
+
     render() {
-        const {bookmarks} = this.state
+        const {bookmarks, cleaned} = this.state
         return (
             <div>
                 <BreadCrumb />
                 <Title>Bookmarks for you</Title>
+                {cleaned ? <button className='button is-info' disabled>Clean bookmarks</button>
+                : <button className='button is-info' onClick={this._handleCleaning}>Clean bookmarks</button> }
                 {bookmarks.length !== 0 ? <MovieList movies={bookmarks} /> 
                 : <p style={{color: 'red', fontSize: 50}}>You don't have any bookmarks</p>}
             </div>
